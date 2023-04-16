@@ -1,0 +1,292 @@
+	<ul>
+	{#each botMessages as { id, title }, index (id)}
+		{@const number = index + 1}
+		<!-- <div class="chat-bubble">{title}</div> -->
+		<!-- style="margin-top: {`${px}px`};" -->
+		<div class="chat chat-start" >
+			<div class="chat-image avatar">
+			  <div class="w-10 rounded-full">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<!-- <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" /> -->
+			  </div>
+			</div>
+			<div class="chat-header">
+			  AnakinSky Bot
+			  <time class="text-xs opacity-50">12:45</time>
+			</div>
+			<div class="chat-bubble">{title}</div>
+			<div class="chat-footer opacity-50">
+			  Greetings earthling...
+			</div>
+		  </div>
+	{/each}
+</ul>
+	
+	
+	import Ele from "../lib/comp/ele.svelte";
+	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
+	
+
+	onMount(() => {
+		console.log('mounted', chatAssistant)
+			// loadComponent({inputValue, chatAssistant});
+		// setTimeout(() => loadComponent(inputValue, chatAssistant), 2000);
+		// setTimeout(() => loadComponent(3), 4000);
+	});
+
+	function createNewComponent() {
+
+		// activeComponent = 
+		componentCount++;
+		componentRefs[1].incrementCounter();
+	}
+
+
+let componentInstances = [];
+
+	function loadComponent(data) {
+		const Component = dynamic(import('../lib/comp/ele.svelte'));
+		const instance = new Component({ target: document.body, props: { data } });
+		componentInstances.push(instance);
+	}
+
+	function updateInstances(data) {
+		componentInstances.forEach((instance) => {
+		instance.$set({ data });
+		});
+	}
+
+	<!-- keep comps in array - check the diff and filter duplicates -->
+
+ <!-- {#each componentInstances as instance, i}
+    <svelte:component  key={componentCount} this={Ele}   props={{ inputValue: instance.name }}  chatAssistant={chatAssistant} />
+    <!-- <svelte:component this={Ele} id={instance.id} registerComponent={registerComponent} /> -->
+  <!-- {/each} --> -->
+
+  <!-- <svelte:component this={Ele} key={componentCount} inputValue={inputValue} chatAssistant={chatAssistant} /> -->
+
+
+	{#each messages as message}
+<div class="chat chat-start" style="margin-top: {`${px}px`};">
+    <div class="chat-image avatar">
+      <div class="w-10 rounded-full">
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <!-- <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" /> -->
+      </div>
+    </div>
+    <div class="chat-header">
+      Darth User
+      <time class="text-xs opacity-50">12:45</time>
+    </div>
+    <div class="chat-bubble">{inputValue}</div>
+    <div class="chat-footer opacity-50">
+      Delivered
+    </div>
+  </div>
+  <div class="chat chat-end">
+    <div class="chat-image avatar">
+      <div class="w-10 rounded-full">
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <!-- <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" /> -->
+      </div>
+    </div>
+    <div class="chat-header">
+      AnakinSky Bot
+      <time class="text-xs opacity-50">12:46</time>
+    </div>
+    <div class="chat-bubble">{chatAssistant}</div>
+    <div class="chat-footer opacity-50">
+      Seen at 12:46
+    </div>
+  </div>
+{/each}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let elementData = {
+	// 	type: 'div',
+	// 	text: 'Hello, world!',
+	// 	margintop: `${px}px`
+	// };
+
+	// function changeElement() {
+	// 	elementData = {
+	// 	type: 'div',
+	// 	text: 'Hello, Svelte!',
+	// 	margintop: `${px}px`
+	// 	};
+	// 	px += 100;
+	// }
+
+	// let element;
+
+	// onMount(() => {
+	// 	element = document.createElement(elementData.type);
+	// 	element.textContent = elementData.text;
+	// 	element.style.marginTop = elementData.margintop
+	// 	document.body.appendChild(element);
+
+	// 	dispatch('elementCreated', { element });
+	// });
+
+	// $: {
+	// 		if (element && element.parentNode) {
+	// 			// element.parentNode.replaceChild(element, element);
+	// 			element = document.createElement(elementData.type);
+	// 			element.textContent = elementData.text;
+	// 			element.style.marginTop = elementData.margintop
+	// 			document.body.appendChild(element);
+
+	// 			dispatch('elementCreated', { element });
+	// 		}
+	// 	}
+
+	// let elementTag = 'div';
+	// let elementText = 'Hello, world!';
+
+	// function changeElement() {
+	// 	elementTag = 'span';
+	// 	elementText = 'Hello, Svelte!';
+	// }
+
+	    // export let elementType = 'div';
+    // export let elementText = '';
+
+
+	// import { onMount } from 'svelte';
+	// import { createEventDispatcher } from 'svelte';
+
+	// const dispatch = createEventDispatcher();
+
+
+
+
+
+
+
+	<!-- 
+	1. pass in new data on new data change 
+	2. create the new div w/ style applied so that is fills out the page 
+ - would be accumulating and adding more to the margin-top 
+
+ -->
+<!-- <Ele elementType={elementTag} elementText={chatAssistant} /> -->
+
+<!-- <button on:click={changeElement}>Change element</button> -->
+
+<!-- Map new div and style and data on reactive$ change  -->
+
+<!-- 
+	extract this to a component and have the margin update on each load
+ -->
+
+
+
+
+
+
+
+
+
+ <script>
+	import Header from './Header.svelte';
+	import './styles.css';
+</script>
+
+
+
+<div class="app">
+	<Header />
+
+	<main>
+		<slot />
+	</main>
+
+	<!-- <footer>
+	
+	</footer> -->
+</div>
+
+<style>
+	.app {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
+	main {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+		width: 100%;
+		max-width: 64rem;
+		margin: 0 auto;
+		box-sizing: border-box;
+		z-index: 0;
+	}
+
+	footer {
+		/* display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 12px; */
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 12px;
+		/* margin-top: 70%; */
+		position: sticky;
+		bottom: 0;
+		z-index: 100;
+	}
+
+	
+	@media (min-width: 480px) {
+		footer {
+			padding: 12px 0;
+		}
+	}
+</style>
